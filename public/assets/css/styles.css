@@ -1,0 +1,731 @@
+/* IEEE YTU BIOMECH link sayfasi - Linktree tasarimiyla birebir.
+   Bootstrap Studio her sayfaya once Bootstrap CSS'ini ekler; asagidaki kurallar
+   Bootstrap'in varsayilan stillerini (reboot) bilerek ezer, gorunum ikisinde de aynidir. */
+
+:root {
+  --bg: #0d1927;
+  --text: #fff;
+  --link-gap: 14px;
+  --btn-bg: #e4e5e6;
+  --btn-bg-hover: #d4d5d6;
+  --btn-text: #010101;
+  --btn-radius: 16px;
+  --btn-inner-radius: 8px;
+  --btn-shadow: 0.3px 0.5px 0.7px hsl(0deg 0% 6.7% / 0.021), 0.9px 1.8px 2.5px -0.6px hsl(0deg 0% 6.7% / 0.026), 2px 4px 5.5px -1.2px hsl(0deg 0% 6.7% / 0.031), 4.6px 9.3px 12.8px -1.7px hsl(0deg 0% 6.7% / 0.035);
+  --font: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+html {
+  background: #2a3541;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: transparent;
+  font-family: var(--font);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: normal;
+  color: var(--text);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body:has(dialog[open]) {
+  overflow: hidden;
+}
+
+img, svg {
+  display: block;
+}
+
+button {
+  font: inherit;
+}
+
+:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 2px;
+}
+
+/* ---------- Arka planlar ---------- */
+
+/* Masaustunde kartin disinda kalan, cok bulanik arka plan */
+.backdrop {
+  display: none;
+}
+
+.page {
+  position: relative;
+  z-index: 0;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  min-height: 100lvh;
+}
+
+/* Kartin arka plani: ekrana sabit (kaydirinca kaymaz), masaustunde kartin sekline kirpilir */
+.frame {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+}
+
+.frame-bg {
+  position: fixed;
+  inset: 0;
+  max-width: 580px;
+  margin: 0 auto;
+  background: var(--bg);
+}
+
+.frame-bg img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 0;
+}
+
+@media (min-width: 576px) {
+  .backdrop {
+    display: block;
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    overflow: hidden;
+    background: #2a3541;
+  }
+}
+
+@media (min-width: 576px) {
+  .backdrop img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    max-width: none;
+    object-fit: cover;
+    transform: scale(1.1);
+  }
+}
+
+@media (min-width: 576px) {
+  .backdrop::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.2);
+  }
+}
+
+@media (min-width: 576px) {
+  .page {
+    max-width: 580px;
+    margin: 40px auto 0;
+    min-height: calc(100vh - 40px);
+    min-height: calc(100lvh - 40px);
+    border-radius: 24px 24px 0 0;
+    box-shadow: 0 24px 32px rgba(0, 0, 0, 0.15);
+  }
+}
+
+@media (min-width: 576px) {
+  .frame {
+    clip-path: inset(0 round 24px 24px 0 0);
+  }
+}
+
+/* ---------- Ust bar ---------- */
+
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 200;
+  display: flex;
+  justify-content: flex-end;
+  height: 68px;
+  margin-bottom: -68px;
+  padding: var(--link-gap);
+  pointer-events: none;
+}
+
+@media (min-width: 576px) {
+  .topbar {
+    top: 12px;
+    margin-top: 14px;
+    margin-bottom: -82px;
+    padding: 14px 28px;
+  }
+}
+
+.glass-btn {
+  pointer-events: auto;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 40px;
+  min-width: 40px;
+  padding: 0 10px;
+  border: 0;
+  border-radius: 16px;
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.15);
+  color: #fff;
+  background: transparent;
+  text-decoration: none;
+  -webkit-backdrop-filter: blur(16px) brightness(0.72);
+  backdrop-filter: blur(16px) brightness(0.72);
+  cursor: pointer;
+  transition: transform 0.3s ease-out, opacity 0.3s ease-out;
+}
+
+.glass-btn::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  background: rgba(0, 0, 0, 0.158);
+}
+
+.glass-btn:hover {
+  color: #fff;
+}
+
+.glass-btn:active {
+  transform: scale(0.95);
+}
+
+/* ---------- Profil ---------- */
+
+.profile {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 96px;
+}
+
+.avatar {
+  width: 96px;
+  height: 96px;
+  margin: 8px 0 16px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.title {
+  max-width: 100%;
+  margin: 0 24px;
+  color: inherit;
+  font-size: 24px;
+  font-weight: 650;
+  line-height: 1.2;
+  text-align: center;
+}
+
+.bio {
+  margin: 4px 0 0;
+  padding: 0 calc(var(--link-gap) * 3);
+  font-size: 16px;
+  font-weight: 550;
+  line-height: 1.5;
+  text-align: center;
+  text-wrap: balance;
+}
+
+.socials {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  margin-top: 8px;
+}
+
+.social {
+  padding: 8px;
+  color: #fff;
+  text-decoration: none;
+  transition: transform 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.social:hover {
+  color: #fff;
+  transform: scale(1.075);
+}
+
+.social svg {
+  width: 32px;
+  height: 32px;
+}
+
+/* ---------- Linkler ---------- */
+
+.content {
+  position: relative;
+  z-index: 1;
+  flex: 1;
+  padding: 0 var(--link-gap) 16px;
+}
+
+@media (min-width: 576px) {
+  .content {
+    padding: 0 calc(var(--link-gap) * 2) 16px;
+  }
+}
+
+.links {
+  display: flex;
+  flex-direction: column;
+  gap: var(--link-gap);
+  margin-top: 32px;
+}
+
+.link {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--btn-radius);
+  background: var(--btn-bg);
+  box-shadow: var(--btn-shadow);
+  color: var(--btn-text);
+  transition: transform 0.075s, box-shadow 0.075s, background-color 0.075s;
+}
+
+@media (pointer: fine) {
+  .link:hover {
+    background: var(--btn-bg-hover);
+  }
+}
+
+.link-main {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1px;
+  min-height: 64px;
+  padding: 12px 64px;
+  color: inherit;
+  text-decoration: none;
+  letter-spacing: -0.2px;
+}
+
+.link-main:hover {
+  color: inherit;
+}
+
+.link-main:focus-visible {
+  outline: 2px solid var(--btn-text);
+  outline-offset: -2px;
+  border-radius: var(--btn-radius);
+}
+
+.thumb {
+  position: absolute;
+  top: 8px;
+  bottom: 8px;
+  left: 8px;
+  width: 48px;
+  height: 48px;
+  overflow: hidden;
+  border-radius: var(--btn-inner-radius);
+}
+
+.thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.link-label {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  overflow: hidden;
+  width: 100%;
+  font-size: 14px;
+  font-weight: 550;
+  line-height: 1.2;
+  text-align: center;
+  text-wrap: balance;
+}
+
+@media (min-width: 576px) {
+  .link-label {
+    font-size: 16px;
+  }
+}
+
+.link-more {
+  position: absolute;
+  top: 50%;
+  right: 12px;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  border: 0;
+  border-radius: 64px;
+  background: transparent;
+  color: var(--btn-text);
+  text-decoration: none;
+  opacity: 0.5;
+  cursor: pointer;
+  transform: translateY(-50%);
+  transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.link-more:hover {
+  background: rgba(0, 0, 0, 0.1);
+  color: var(--btn-text);
+  opacity: 1;
+}
+
+.link-more:focus-visible {
+  outline: 2px solid var(--btn-text);
+  outline-offset: 0;
+  opacity: 1;
+}
+
+.footer {
+  height: 180px;
+}
+
+@media (min-width: 767px) {
+  .footer {
+    height: 162px;
+  }
+}
+
+/* ---------- Masaustu "Mobilde goruntule" QR kodu ---------- */
+
+.qr {
+  position: fixed;
+  right: 32px;
+  bottom: -250px;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  opacity: 0;
+  transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@media (min-width: 1022px) {
+  .qr {
+    bottom: 32px;
+    opacity: 1;
+  }
+}
+
+.qr p {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 550;
+  line-height: 1.5;
+  text-align: center;
+}
+
+.qr svg {
+  width: 120px;
+  height: 120px;
+}
+
+/* ---------- Paylas penceresi ---------- */
+
+.sheet {
+  width: 100%;
+  max-width: 100%;
+  max-height: 100%;
+  margin: auto auto 0;
+  padding: 0;
+  border: 0;
+  border-radius: 16px 16px 0 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  background: #fff;
+  color: #000;
+  font-family: var(--font);
+}
+
+.sheet::backdrop {
+  background: rgba(0, 0, 0, 0.6);
+}
+
+.sheet[open] {
+  animation: sheet-up 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.sheet[open]::backdrop {
+  animation: fade-in 0.3s ease-out;
+}
+
+@keyframes sheet-up {
+  from {
+    transform: translateY(100%);
+  }
+}
+
+@keyframes sheet-pop {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+}
+
+@media (min-width: 576px) {
+  .sheet {
+    max-width: 348px;
+    margin: auto;
+    border-radius: 16px;
+  }
+}
+
+@media (min-width: 576px) {
+  .sheet[open] {
+    animation-name: sheet-pop;
+    animation-duration: 0.2s;
+  }
+}
+
+@media (min-width: 767px) {
+  .sheet {
+    max-width: 520px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sheet[open], .sheet[open]::backdrop {
+    animation: none;
+  }
+}
+
+.sheet-inner {
+  padding: 24px 8px 0;
+}
+
+.sheet-head {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 24px;
+}
+
+.sheet-title {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 550;
+  line-height: 1;
+}
+
+.sheet-close {
+  position: absolute;
+  top: -4px;
+  right: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  padding: 8px;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  color: #000;
+  cursor: pointer;
+}
+
+.sheet-close:hover {
+  background: #f1f1ef;
+}
+
+.sheet :focus-visible {
+  outline: 2px solid #000;
+  outline-offset: 2px;
+}
+
+.sheet-preview {
+  padding: 24px 20px;
+}
+
+.og-preview {
+  width: 100%;
+  height: auto;
+  border-radius: 24px;
+}
+
+.link-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  width: 100%;
+  max-width: 327px;
+  margin: 0 auto;
+  padding: 24px;
+  border: 1px solid #dcdcdc;
+  border-radius: 24px;
+  background: #f3f3f1;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.08);
+  color: #000;
+  text-decoration: none;
+  transition: transform 250ms ease-in-out, box-shadow 250ms ease-in-out;
+}
+
+.link-card:hover {
+  color: #000;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.link-card img {
+  width: 120px;
+  height: 120px;
+  border-radius: 8px;
+  object-fit: cover;
+  background: #fff;
+}
+
+.link-card-text {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+}
+
+.link-card-title {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 800;
+  line-height: 1.2;
+  text-align: center;
+  text-wrap: balance;
+}
+
+.link-card-url {
+  width: min(90%, 13ch);
+  margin: 0;
+  overflow: hidden;
+  font-size: 13px;
+  line-height: 1.5;
+  text-align: center;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.share-list {
+  position: relative;
+  padding: 24px 0;
+}
+
+.share-scroll {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 0 40px 0 16px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  scroll-behavior: smooth;
+}
+
+.share-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+.share-item {
+  flex: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  width: 60px;
+  padding: 0 3px;
+  border: 0;
+  background: none;
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.share-item:hover {
+  color: #000;
+}
+
+.share-item svg {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+}
+
+.share-item span {
+  font-size: 12px;
+  font-weight: 450;
+  line-height: 18px;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.share-arrow {
+  position: absolute;
+  top: 26px;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  padding: 12px;
+  border: 1px solid #e0e2d9;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.08);
+  color: #000;
+  cursor: pointer;
+}
+
+.share-arrow.prev {
+  left: 12px;
+}
+
+.share-arrow.prev svg {
+  transform: rotate(90deg);
+}
+
+.share-arrow.next {
+  right: 12px;
+}
+
+.share-arrow.next svg {
+  transform: rotate(-90deg);
+}
+
+@media (pointer: coarse) {
+  .share-arrow {
+    display: none;
+  }
+}
